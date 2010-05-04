@@ -11,14 +11,43 @@ class Search_lib
 
 	public function search($q)
 	{
-		$sql = "SELECT slug AS id, title AS search_title, body AS search_desc, CONCAT('/',slug) AS search_link FROM pages WHERE body LIKE '%:query%' OR title LIKE '%:query%'\n";
-		$sql .= "UNION ALL\n";
-		$sql .= "SELECT id, title AS search_title, content AS search_desc, CONCAT('/forums/posts/view_reply/',id) AS search_link FROM forum_posts WHERE content LIKE '%:query%' OR title LIKE '%:query%'";
-		$sql .= "UNION ALL\n";
-		$sql .= "SELECT slug AS id, title AS search_title, body AS search_desc, CONCAT('/news/', YEAR(FROM_UNIXTIME(created_on)),'/',MONTH(FROM_UNIXTIME(created_on)),'/',slug) AS search_link FROM news WHERE body LIKE '%:query%' OR title LIKE '%:query%' AND status='live'";
+		$sql = "(SELECT slug AS id,
+						title AS search_title,
+						body AS search_desc,
+						CONCAT('/',slug) AS search_link,
+						((1.3 * (MATCH(title) AGAINST (':query' IN BOOLEAN MODE)))
+						 + (0.6 * (MATCH(body) AGAINST (':query' IN BOOLEAN MODE)))
+						) AS relevance
+						FROM pages
+						WHERE MATCH (title,body)
+						AGAINST (':query' IN BOOLEAN MODE))\n";
 
-		$sql = str_replace(':query', $q, $sql);
-		
+		$sql .= "UNION ALL\n";
+		$sql .= "(SELECT id,
+						 title AS search_title,
+						 content AS search_desc,
+						 CONCAT('/forums/posts/view_reply/',id) AS search_link,
+						 ((1.3 * (MATCH(title) AGAINST (':query' IN BOOLEAN MODE)))
+						  + (0.6 * (MATCH(content) AGAINST (':query' IN BOOLEAN MODE)))
+						 ) AS relevance
+						 FROM forum_posts
+						 WHERE MATCH (title,content)
+						 AGAINST (':query' IN BOOLEAN MODE))\n";
+		$sql .= "UNION ALL\n";
+		$sql .= "(SELECT slug AS id,
+						 title AS search_title,
+						 body AS search_desc,
+						 CONCAT('/news/', YEAR(FROM_UNIXTIME(created_on)),'/',MONTH(FROM_UNIXTIME(created_on)),'/',slug) AS search_link,
+						 ((1.3 * (MATCH(title) AGAINST (':query' IN BOOLEAN MODE)))
+						  + (0.6 * (MATCH(body) AGAINST (':query' IN BOOLEAN MODE)))
+						 ) AS relevance
+						 FROM news
+						WHERE (MATCH (title,body)
+						AGAINST (':query' IN BOOLEAN MODE)) AND status = 'live')\n";
+		$sql .= "ORDER BY relevance DESC;";
+
+		$sql = str_replace(':query', '+' . $q, $sql);
+		echo $sql;
 		return $this->ci->db->query($sql)->result();
 		
 	}
