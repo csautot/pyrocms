@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="0.5">
+	<name>
+		<en>Search</en>
+	</name>
+	<description>
+		<en>Searches the site</en>
+	</description>
+	<is_frontend>1</is_frontend>
+	<is_backend>0</is_backend>
+	<is_backend_menu>0</is_backend_menu>
+</module>
