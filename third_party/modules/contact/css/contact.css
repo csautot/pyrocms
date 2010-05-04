@@ -1,0 +1,31 @@
+/* Validation Message Style */
+.error { color: #D8000C; }
+
+/* Simple Form */
+.simple-form {}
+.simple-form fieldset,
+.simple-form fieldset legend { border: none; text-align: left; }
+.simple-form fieldset { border-top: 1px solid #ccc; }
+.simple-form .field-block { padding: 10px 10px; }
+.simple-form .field-block label { float: left; width: 180px; }
+.simple-form .field-block input { width: 220px; }
+.simple-form .field-block select { display: block; width: 220px; }
+.simple-form .field-block #other_subject { display: block; margin: 20px 0 0 180px; }
+.simple-form .actions { padding: 0 0 15px 11px; }
+
+/* Nice Form */
+.nice-form {}
+.nice-form fieldset,
+.nice-form fieldset legend { border: none; text-align: left; }
+.nice-form fieldset { border-top: 1px solid #ccc; }
+.nice-form .field-block { padding: 10px 10px; }
+.nice-form .field-block label { float: left; padding: 4px 0; width: 180px; }
+.nice-form .field-block input { border: 1px solid #ccc; -moz-border-radius: 10px; -webkit-border-radius: 10px; padding: 4px 8px; width: 220px; }
+.nice-form .field-block select { border: 1px solid #ccc; display: block; -moz-border-radius: 10px; -webkit-border-radius: 10px; padding: 4px 8px; width: 238px; }
+.nice-form .field-block #other_subject { display: block; margin: 20px 0 0 180px; }
+.nice-form textarea { border: 1px solid #ccc; -moz-border-radius: 10px; -webkit-border-radius: 10px; padding: 10px 8px; }
+.nice-form .actions { padding: 0 0 15px 11px; }
+.nice-form .actions input { border: 1px solid #ccc; -moz-border-radius: 10px; -webkit-border-radius: 10px; padding: 4px 20px; }
+
+.field-block:hover { background-color: #e5e5e5; }
+.field-block input:focus, textarea:focus { background-color: #f4fcff; border-color: #103B66; color: #235485; }

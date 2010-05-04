@@ -23,6 +23,9 @@ class Contact extends Public_Controller
 	{
 		parent::Public_Controller();        
 		$this->lang->load('contact');
+		
+		// Add a link to the forum CSS into the head
+		$this->template->append_metadata( css('contact.css', 'contact') );
 	}
 	
 	function index()
