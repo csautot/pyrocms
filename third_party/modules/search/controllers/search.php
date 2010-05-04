@@ -9,7 +9,9 @@ class Search extends Public_Controller {
 
 		foreach($results as &$result)
 		{
-			$result->search_desc = str_replace($query, '<strong>' . $query . '</strong>', htmlentities($result->search_desc));
+			$result->search_desc = $this->search_lib->fix_desc($result->search_desc, $query);
+			$result->search_desc = preg_replace("/($query)/i", "<strong>$1</strong>", $result->search_desc);
+			$result->search_title = preg_replace("/($query)/i", "<strong>$1</strong>", $result->search_title);
 		}
 
 		$this->data->results = $results;
