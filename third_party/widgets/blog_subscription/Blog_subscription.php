@@ -1,18 +1,18 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * @package 		PyroCMS
- * @subpackage 		Twitter Feed Widget
- * @author			Phil Sturgeon - PyroCMS Development Team
+ * @subpackage 		Blog Subscription Widget
+ * @author			Zack Kitzmiller
  * 
- * Show Twitter feeds in your site
+ * RSS Link on your site
  */
 
 class Blog_subscription extends Widgets
 {
 	public $title = 'Blog Subscription';
-	public $description = 'Display tweets from a user on Twitter.';
-	public $author = 'Phil Sturgeon';
-	public $website = 'http://philsturgeon.co.uk/';
+	public $description = 'Display RSS from blog module.';
+	public $author = 'Zack Kitzmiller';
+	public $website = 'http://getcloudigniter.com/';
 	public $version = '1.0';
 	
 	public function run()
