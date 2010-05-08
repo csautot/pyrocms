@@ -20,10 +20,21 @@
 |	http://www.codeigniter.com/user_guide/general/routing.html
 */
 
-$route['news/(:num)/(:num)/(:any)'] = "blog/view/$3";
-$route['news/page/(:num)'] = "news/index/$1";
+// Maintain admin routes
+$route['blog/admin(:any)?'] = 'admin$1';
 
-$route['news/rss/all.rss'] = "blog/rss/index";
-$route['news/rss/(:any).rss'] = "blog/rss/category/$1";
+$route['blog/rss/all.rss'] = "rss/index";
+$route['blog/rss/(:any).rss'] = "rss/category/$1";
+
+$route['blog/category/(:any)'] = 'blog/category/$1';
+$route['blog/archive/(:num)/(:num)'] = 'blog/archive/$1/$2';
+
+$route['blog/(:any)'] = 'blog/view/$1';
+
+$route['news/(:num)/(:num)/(:any)'] = "blog/view/$3";
+$route['news/page/(:num)'] = "blog/index/$1";
+
+$route['news/rss/all.rss'] = "rss/index";
+$route['news/rss/(:any).rss'] = "rss/category/$1";
 
 ?>

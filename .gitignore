@@ -1,6 +1,8 @@
 .buildpath
 .project
 .settings
+application/config/config.php
+application/config/databse.php
 application/cache/*_m/*
 application/cache/*_lib/*
 application/cache/dwoo/compiled/*.php

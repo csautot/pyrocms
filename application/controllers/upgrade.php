@@ -77,6 +77,10 @@ class Upgrade extends Controller
  	// Upgrade
  	function upgrade_0981()
 	{
+	   
+        echo "Migrating News to Blogs..<br />";
+		$this->dbforge->rename_table('news', 'blog_entries');
+	
 		echo "Creating modules table...<br />";
 		$this->db->query('DROP TABLE IF EXISTS `modules`');
 		$this->db->query('CREATE TABLE `modules` (
