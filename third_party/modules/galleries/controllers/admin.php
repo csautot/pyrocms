@@ -135,6 +135,9 @@ class Admin extends Admin_Controller
 		
 		if ( $this->form_validation->run() )
 		{			
+			// Plugin time!
+			$_POST = $this->plugins->run('galleries_create_before_insert', $_POST);
+			
 			// Insert the gallery
 			if ( $this->galleries_m->insert_gallery($_POST) === TRUE )
 			{
@@ -192,6 +195,9 @@ class Admin extends Admin_Controller
 		// Valid form data?
 		if ( $this->form_validation->run() )
 		{
+			// Plugin time!
+			$_POST = $this->plugins->run('galleries_manage_before_update', $_POST);
+			
 			// Try to update the gallery
 			if ( $this->galleries_m->update_gallery($id, $_POST) === TRUE )
 			{
@@ -313,6 +319,9 @@ class Admin extends Admin_Controller
 		
 		if ( $this->form_validation->run() )
 		{
+			// Plugin time!
+			$_POST = $this->plugins->run('galleries_upload_before_upload', $_POST);
+			
 			if ( $this->gallery_images_m->upload_image($_POST) === TRUE )
 			{
 				$this->session->set_flashdata('success', lang('gallery_images.upload_success'));
@@ -368,6 +377,9 @@ class Admin extends Admin_Controller
 		// I can haz valid formdata?
 		if ( $this->form_validation->run() )
 		{
+			// Plugin time!
+			$_POST = $this->plugins->run('galleries_edit_image_before_update', $_POST);
+			
 			// Successfully updated the changes?
 			if ( $this->gallery_images_m->update_image($id, $_POST) === TRUE)
 			{

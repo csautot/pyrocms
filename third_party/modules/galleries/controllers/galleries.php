@@ -39,6 +39,11 @@ class Galleries extends Public_Controller
 	public function index()
 	{
 		$this->data->galleries = $this->galleries_m->get_all_with_filename();
+		
+		// Run all plugins for the 'galleries_index' hook
+		$this->data->galleries = $this->plugins->run('galleries_index', $this->data);
+		
+		// Load the view
 		$this->template->build('index', $this->data);
 	}
 	
@@ -59,6 +64,10 @@ class Galleries extends Public_Controller
 		$this->data->gallery 		= $this->galleries_m->get_by('slug', $slug);
 		$this->data->gallery_images = $this->gallery_images_m->get_images_by_gallery($this->data->gallery->id);
 		$this->data->sub_galleries 	= $this->galleries_m->get_all_with_filename('parent', $this->data->gallery->id);
+		
+		// Run all plugins for the 'galleries_gallery' hook
+		$this->data					= $this->plugins->run('galleries_gallery', $this->data);
+		
 		$this->template->build('gallery', $this->data);
 	}
 	
@@ -89,6 +98,10 @@ class Galleries extends Public_Controller
 		// Load the view
 		$this->data->gallery 		=& $gallery;
 		$this->data->gallery_image 	=& $gallery_image;
+		
+		// Run all the plugins for the 'galleries_image' hook
+		$this->data = $this->plugins->run('galleries_image', $this->data);
+		
 		$this->template->build('image', $this->data);
 	}
 }
